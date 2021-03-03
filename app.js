@@ -15,24 +15,67 @@ const startGame = () => {
 
 const playMatch = () => {
     const options = document.querySelectorAll(".options button");
-    const playerHand = document.querySelectorAll(".player-hand");
-    const CPUHand = document.querySelectorAll(".CPU-hand");
+    const playerHand = document.querySelector(".playerHand");
+    const CPUHand = document.querySelector(".CPUHand");
 
     const CPUoptions = ["rock", "paper", "scissors"];
 
-options.forEach(option=> {
+options.forEach(option => {
     option.addEventListener("click", function() {
         
         const CPUnumber = Math.floor(Math.random() * 3);
-        const CPUChoice = CPUoptions[CPUnumber]
-        console.log(CPUnumber)
+        const CPUChoice = CPUoptions[CPUnumber];
+        
+
+        playerHand.src = `${this.textContent}.png`;
+        CPUHand.src = `${CPUChoice}.png`;
+        
     });
 });
-
-// 33 mins
-
 };
+    //Who is the winner?
+const compareHands = (playerChoice, CPUChoice) => {
+const winner = document.querySelector(".winner");
+    
+    if (playerChoice === CPUChoice) {
+        winner.textContent = "A draw!"
+        return;
+}
+    // Player choses rock
 
+    if (playerChoice === "rock") {
+        if(CPUChoice === "scissors") {
+            winner.textContent = "Player Wins!"
+            return;
+        } else {
+            winner.textContent = "CPU wins!"
+            return;
+        }
+    }
+    // Player choses paper
+
+    if (playerChoice === "paper") {
+        if(CPUChoice === "scissors") {
+            winner.textContent = "CPU wins!"
+            return;
+        } else {
+            winner.textContent = "Player wins!"
+            return;
+        }
+    }
+    // Player choses scissors
+
+    if (playerChoice === "scissors") {
+        if(CPUChoice === "rock") {
+            winner.textContent = "CPU wins!"
+            return;
+        } else {
+            winner.textContent = "Player wins!"
+            return;
+        }
+    }
+
+}
 
 startGame();
 playMatch();
